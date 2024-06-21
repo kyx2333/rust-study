@@ -1,4 +1,4 @@
-use specs::{Component, NullStorage,VecStorage, World,WorldExt};
+use specs::{storage, Component, NullStorage, VecStorage, World, WorldExt};
 
 #[derive( Debug, Component, Clone, Copy)]
 #[storage(VecStorage)]
@@ -22,15 +22,6 @@ pub struct Renderable {
  #[storage(VecStorage)]
 pub struct Player {}
 
-#[derive(Component)]
-#[storage(VecStorage)]
- pub struct Box {}
-
-#[derive(Component)]
-#[storage(VecStorage)]
-pub struct  BoxSpot{}
-
-
 
 #[derive(Component,Default)]
 #[storage(NullStorage)]
@@ -49,4 +40,20 @@ pub fn register_components(world: &mut World){
     world.register::<BoxSpot>();
     world.register::<Movable>();
     world.register::<Immovable>();
+ }
+
+
+ pub enum  BoxColor {
+     Red,
+     Blue,
+ }
+ #[derive(Component)]
+ #[storage(VecStorage)]
+ pub struct Box{
+    pub colour: BoxColor,
+ }
+ #[derive(Component)]
+ #[storage(VecStorage)]
+ pub struct BoxSpot{
+    pub colour: BoxColor,
  }
